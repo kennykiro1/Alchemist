@@ -1,0 +1,6 @@
+sec_in02,148,185,	boss_monster	Freeoni	1159,1,39600000,600000,0
+sec_in02,163,185,	boss_monster	Garm	1252,1,7200000,600000,1
+sec_in02,184,184,	boss_monster	Amon Ra	1511,1,3600000,600000,0
+sec_in02,184,174,	boss_monster	Turtle General	1312,1,3600000,600000,0
+sec_in02,183,153,	boss_monster	Detardeurus	1719,1,10800000,600000,0
+sec_in02,167,142,	boss_monster	Tao Gunka	1583,1,18000000,600000,0

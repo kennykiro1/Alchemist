@@ -1,0 +1,37 @@
+sec_in02,142,178,6	script	Prisão Mvps	113,{
+	mes "Olá "+StrCharInfo(0)+"!";
+	mes "Deseja ir para algum dos lugares abaixo?";
+	next;
+	switch(select("prisão 1:prisão 2:prisão 3:prisão 4:prisão 5:prisão 6")){
+		case 1:
+			mes "Até mais!";
+			close2;
+			warp "sec_in02",148,185;
+			end;
+		case 2:
+			mes "Até mais!";
+			close2;
+			warp "sec_in02",163,185;
+			end;
+		case 3:
+			mes "Até mais!";
+			close2;
+			warp "sec_in02",184,184;
+			end;
+		case 4:
+			mes "Até mais!";
+			close2;
+			warp "sec_in02",183,174;
+			end;
+		case 5:
+			mes "Até mais!";
+			close2;
+			warp "sec_in02",183,153;
+			end;
+		case 6:
+			mes "Até mais!";
+			close2;
+			warp "sec_in02",167,142;
+			end;
+	}
+}

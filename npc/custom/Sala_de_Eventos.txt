@@ -1,0 +1,13 @@
+prontera,147,171,6	script	Sala De Eventos	10297,{
+  cutin "se_moon01",2;
+	mes "Olá "+StrCharInfo(0)+"!";
+	mes "Deseja ir para algum dos lugares abaixo?";
+	next;
+	switch(select("Sala_de_Eventos")){
+		case 1:
+			mes "Até mais!";
+			close2;
+			warp "novice",51,44;
+			end;
+	}
+}

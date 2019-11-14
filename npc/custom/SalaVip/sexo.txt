@@ -1,0 +1,32 @@
+sec_in02,131,167,4	script	Refiner	711,{
+
+if(#refinou != 0){
+mes "Olá "+strcharinfo(0)+" você já Refinou seus equipamentos.";
+close;
+}
+mes "Olá, estou aqui para ajudar a refinar seus equipamentos.";
+mes "Deseja refinar seus equipamentos?";
+switch ( select ("Sim, desejo refinar","Não, quero sair") )
+{
+case 1:
+next;
+mes "Ok, vamos lá...";
+if(getgroupid() >= 1) {
+atcommand "@refine 256 5";
+atcommand "@refine 32 5";
+atcommand "@refine 2 5";
+atcommand "@refine 16 5";
+atcommand "@refine 4 5";
+close;
+}
+atcommand "@refine 256 4";
+atcommand "@refine 32 4";
+atcommand "@refine 4 4";
+atcommand "@refine 16 4";
+atcommand "@refine 2 4";
+close;
+case 2:
+mes "Ok, até mais tarde.";
+close;
+}
+}

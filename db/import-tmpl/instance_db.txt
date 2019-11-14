@@ -1,0 +1,7 @@
+// Instance Database
+//
+// Structure of Database:
+// ID,Name,LimitTime,IdleTimeOut,EnterMap,EnterX,EnterY,Map2,Map3,...,Map255
+//
+// EnterMap is considered as Map1
+22,Poring Village,7200,300,1@begi,102,24

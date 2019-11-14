@@ -1,0 +1,15 @@
+prontera,148,193,4	script	Montaria	91,{
+mes "Olá, estou aqui para ajudar a pegar sua Montaria.";
+mes "Deseja Pegar Sua Montaria?";
+switch ( select ("Sim, desejo Pegar","Não, quero sair") )
+{
+case 1:
+next;
+mes "Ok, vamos lá...";
+atcommand "@mount";
+close;
+case 2:
+mes "Ok, até mais tarde.";
+close;
+	}
+}

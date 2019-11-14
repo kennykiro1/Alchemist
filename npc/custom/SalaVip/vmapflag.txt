@@ -1,0 +1,6 @@
+sec_in02	mapflag	nomemo
+sec_in02	mapflag	nobranch
+sec_in02	mapflag	nowarpto
+sec_in02	mapflag	nowarp
+sec_in02	mapflag	nosave
+sec_in02	mapflag	noteleport

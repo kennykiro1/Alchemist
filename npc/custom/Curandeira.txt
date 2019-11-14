@@ -1,0 +1,95 @@
+//===== Hercules Script ======================================
+//= Healer
+//===== By: ==================================================
+//= Euphy
+//===== Current Version: =====================================
+//= 1.2
+//===== Description: =========================================
+//= Basic Healer script.
+//===== Additional Comments: =================================
+//= 1.0 Initial script.
+//= 1.1 Aligned coordinates with @go.
+//= 1.2 Fix variables and character stuck at healing
+//============================================================
+
+-	script	Curandeira	-1,{
+
+	.@price = 0;	// Zeny necessário para curar
+	.@Buffs = 0;	// Também buffar players? (1: sim / 0: não)
+	.@Delay = 0;	// Delay da cura, em segundos
+
+	if (@HD > gettimetick(2)) end;
+	if (.@price) {
+		message strcharinfo(0),"Curar custa "+.@price+" Zeny.";
+		if (Zeny < .@price) end;
+		if(select("^0055FFCurar^000000:^777777Cancelar^000000") == 2) close;
+		Zeny -= .@price;
+	}
+	specialeffect2 EF_HEAL2; percentheal 100,100;
+			if( getbrokenid(1) ) repairall;
+			atcommand "@identifyall";
+			percentheal 100,100;
+			sc_start SC_GLORIA,180000,5;
+			sc_start SC_BLESSING,180000,10;
+			sc_start SC_MAGNIFICAT,180000,5;
+			sc_start SC_IMPOSITIO,180000,10;
+			sc_start SC_ENDURE,180000,10;
+	        sc_end SC_FREEZE;
+	        sc_end SC_STUN;
+	        sc_end SC_SLEEP;
+	        sc_end SC_POISON;
+	        sc_end SC_CURSE;
+	        sc_end SC_SILENCE;
+        	sc_end SC_CONFUSION;
+        	sc_end SC_BLIND;
+        	sc_end SC_BLEEDING;			
+	if (.@Buffs) {
+		specialeffect2 EF_INCAGILITY; sc_start SC_INC_AGI,240000,10;
+		specialeffect2 EF_BLESSING; sc_start SC_BLESSING,240000,10;
+	}
+	if (.@Delay) @HD = gettimetick(2)+.@Delay;
+	end;
+}
+
+
+// Duplicates
+//============================================================
+alberta,25,240,6	duplicate(Curandeira)	Curandeira#alb	4_M_FARIYKING
+aldebaran,135,118,6	duplicate(Curandeira)	Curandeira#alde	4_M_FARIYKING
+amatsu,200,79,4	duplicate(Curandeira)	Curandeira#ama	4_M_FARIYKING
+ayothaya,207,169,6	duplicate(Curandeira)	Curandeira#ayo	4_M_FARIYKING
+comodo,184,158,6	duplicate(Curandeira)	Curandeira#com	4_M_FARIYKING
+einbech,57,36,6	duplicate(Curandeira)	Curandeira#einbe	4_M_FARIYKING
+einbroch,57,202,6	duplicate(Curandeira)	Curandeira#einbr	4_M_FARIYKING
+geffen,115,72,6	duplicate(Curandeira)	Curandeira#gef	4_M_FARIYKING
+gonryun,156,122,6	duplicate(Curandeira)	Curandeira#gon	4_M_FARIYKING
+hugel,89,150,6	duplicate(Curandeira)	Curandeira#hug	4_M_FARIYKING
+izlude,125,118,5	duplicate(Curandeira)	Curandeira#izl	4_M_FARIYKING
+jawaii,250,139,4	duplicate(Curandeira)	Curandeira#jaw	4_M_FARIYKING
+lighthalzen,152,100,6	duplicate(Curandeira)	Curandeira#lhz	4_M_FARIYKING
+louyang,226,103,4	duplicate(Curandeira)	Curandeira#lou	4_M_FARIYKING
+manuk,272,144,6	duplicate(Curandeira)	Curandeira#man	4_M_FARIYKING
+mid_camp,203,289,6	duplicate(Curandeira)	Curandeira#mid	4_M_FARIYKING
+moc_ruins,72,164,4	duplicate(Curandeira)	Curandeira#moc	4_M_FARIYKING
+morocc,153,97,6	duplicate(Curandeira)	Curandeira#mor	4_M_FARIYKING
+moscovia,220,191,4	duplicate(Curandeira)	Curandeira#mos	4_M_FARIYKING
+niflheim,212,182,5	duplicate(Curandeira)	Curandeira#nif	4_M_FARIYKING
+payon,179,106,4	duplicate(Curandeira)	Curandeira#pay	4_M_FARIYKING
+prontera,159,190,4	duplicate(Curandeira)	Curandeira#prt	4_M_FARIYKING
+rachel,125,116,6	duplicate(Curandeira)	Curandeira#rac	4_M_FARIYKING
+splendide,201,153,4	duplicate(Curandeira)	Curandeira#spl	4_M_FARIYKING
+thor_camp,249,74,4	duplicate(Curandeira)	Curandeira#thor	4_M_FARIYKING
+umbala,105,148,3	duplicate(Curandeira)	Curandeira#umb	4_M_FARIYKING
+veins,217,121,4	duplicate(Curandeira)	Curandeira#ve	4_M_FARIYKING
+xmas,143,136,4	duplicate(Curandeira)	Curandeira#xmas	4_M_FARIYKING
+yuno,164,45,4	duplicate(Curandeira)	Curandeira#yuno	4_M_FARIYKING
+
+// Duplicates (Renewal)
+//============================================================
+brasilis,194,221,6	duplicate(Curandeira)	Curandeira#bra	4_M_FARIYKING
+dewata,195,187,4	duplicate(Curandeira)	Curandeira#dew	4_M_FARIYKING
+dicastes01,201,194,4	duplicate(Curandeira)	Curandeira#dic	4_M_FARIYKING
+ecl_in01,45,60,4	duplicate(Curandeira)	Curandeira#ecl	4_M_FARIYKING
+malangdo,132,114,6	duplicate(Curandeira)	Curandeira#mal	4_M_FARIYKING
+malaya,205,205,6	duplicate(Curandeira)	Curandeira#ma	4_M_FARIYKING
+mora,55,152,4	duplicate(Curandeira)	Curandeira#mora	4_M_FARIYKING

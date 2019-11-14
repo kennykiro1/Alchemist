@@ -1,0 +1,18 @@
+prontera,147,173,6	script	Sala Vip	10296,{
+  cutin "Star_Emperor",2;
+    if(vip_status(1)){
+    mes "Olá "+strcharinfo(0)+"!";
+    mes "Deseja ir para a sala vip?";
+    next;
+    switch(select("Sala vip:cancelar")){
+    
+    case 1: 
+        warp "sec_in02",139,161;
+        end;
+    case 2: end;
+        //caso não for vip vai falar isso:
+    }
+    }
+    mes "Você não é vip, lamento mas essa sala é só para usuários VIP's, você pode comprar o ticket no cash shop";
+        end;
+}

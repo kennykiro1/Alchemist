@@ -1,0 +1,27 @@
+prontera,163,192,4	script	Doram	10242,{
+if (BaseLevel > 1) goto NO;
+if (class == 0) goto case3;
+if (class > 0) goto NO;
+
+case3:
+mes "deseja Evoluir para classe doram?";
+switch ( select ("Sim","Não") ){
+
+case 1:
+next;
+mes "[^0000FFDoram^000000]";
+mes "Ok, vamos lá¡...";
+atcommand "@job 4218";
+close;
+
+case 2:
+mes "[^0000FFDoram^000000]";
+mes "Pronto.";
+close;
+
+NO:
+mes "[^0000FFDoram^000000]";
+mes "Para Evoluir para a Classe Doram você precisa ser Aprendiz e ter o level de base 1";
+close;
+	}
+}

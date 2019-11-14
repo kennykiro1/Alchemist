@@ -1,0 +1,18 @@
+-	script	Sair Prisão	-1,{
+	mes "Olá "+StrCharInfo(0)+"!";
+	mes "Deseja ir para algum dos lugares abaixo?";
+	next;
+	switch(select("Sair Prisão")){
+		case 1:
+			mes "Até mais!";
+			close2;
+			warp "sec_in02",165,162;
+			end;
+	}
+}
+// Duplicates
+//============================================================
+sec_in02,185,166,4	duplicate(Sair Prisão)	Sair Prisão#alb	405
+sec_in02,174,142,0	duplicate(Sair Prisão)	Sair Prisão#alde	405
+sec_in02,154,184,4	duplicate(Sair Prisão)	Sair Prisão#ayo	405
+sec_in02,170,183,4	duplicate(Sair Prisão)	Sair Prisão#com	405

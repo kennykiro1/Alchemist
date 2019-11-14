@@ -1,0 +1,6 @@
+//www.ragnacrie.blogspot.com \\
+-	script	Anuncioaologar	-1,{
+OnPCLogInEvent:
+Announce "Olá "+StrCharInfo(0)+"! Bem-Vindo ao AlchemistRO!",bc_self;
+end;
+}

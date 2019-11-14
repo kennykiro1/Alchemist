@@ -1,0 +1,13 @@
+prontera,147,169,6	script	Sala De Quests	10295,{
+  cutin "soul_van01",2;
+	mes "Olá "+StrCharInfo(0)+"!";
+	mes "Deseja ir para algum dos lugares abaixo?";
+	next;
+	switch(select("Sala de quests")){
+		case 1:
+			mes "Até mais!";
+			close2;
+			warp "que_moon",165,24;
+			end;
+	}
+}

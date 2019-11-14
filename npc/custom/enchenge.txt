@@ -1,0 +1,156 @@
+prontera,146,171,3	script	Valquíria Obscura#new10	4_F_VALKYRIE2,{
+	disable_items;
+	mes "[Valquíria Obscura]";
+	mes "Olá ~ Estou dando estatísticas extras para quem tem o item do Godlike Manteal.";
+	next;
+	if (getequipid(EQI_GARMENT) != 11075) {// Godlike Manteal
+		mes "[Valquíria Obscura]";
+		mes "Por favor ^0000ffuse o seu item Godlike Manteal primeiro^000000, e então eu vou te dar estatísticas extras.";
+		close;
+	}
+	switch( select( "Cancel", "Encantar Godlike Manteal", "Redefinir estatísticas de Godlike Manteal" ) ) {
+	case 1:
+		mes "[Valquíria Obscura]";
+		mes "Mais tarde então...";
+		close;
+	case 2:
+		.@refine = getequiprefinerycnt(EQI_GARMENT);
+		setarray .@card[0],
+			getequipcardid(EQI_GARMENT,0),
+			getequipcardid(EQI_GARMENT,1),
+			getequipcardid(EQI_GARMENT,2),
+			getequipcardid(EQI_GARMENT,3);
+		mes "[Valquíria Obscura]";
+		mes "Somente 1 soquete pode obter uma estatística extra quando o nível de refino estiver entre 1 e 6.";
+		mes "Se o nível de refino for 7 ~ 8, ele poderá receber Estatásticas para 2 soquetes.";
+		mes "+9 podem receber Estatásticas em todas as 3 slots.";
+		next;
+		mes "[Valquíria Obscura]";
+		if (.@refine < 7)
+			mes "O nível de refino deste item é menor que 7. Somente^ff0000Soquete slot 4^000000 ppode receber estatísticas extras.";
+		else if (.@refine < 9)
+			mes "O nível de refino deste item está¡ entre 7 e 8. ^ff0000Soquete slot 3 e 4^000000 pode receber estatísticas extras.";
+		else
+			mes "O nível de refino deste item é superior a 9. Todos os 3 de ^ff0000Soquete slot 2, 3 e 4^000000 pode receber estatísticas extras.";
+		mes "Que tipo de estatásticas extras você deseja?";
+		next;
+		switch( select( "Deixe-me colocar meu equipamento", "1. espírito de luta", "2.Magic Attack", "3. tiro com arco", "4.Crítico", "5.MaxHP", "6.MaxSP", "7.Atk speed", "8.STR", "9.AGI", "10.VIT", "11.INT", "12.DEX", "13.LUK" ) ) {
+		case 1:
+			mes "[Valquíria Obscura]";
+			mes "Volte depois de equipar seu item.";
+			close;
+		case 2:
+			setarray .@enchants[0],4809,4808,4820,4821;		// Fighting Spirit 3~5 / Fighting Spirit 6
+			.@string$ = "As Estatásticas do Fighting Spirit serão dadas aleatoriamente por 3 ~ 5 (ATK+HIT) alcance.";
+			break;
+		case 3:
+			setarray .@enchants[0],4812,4826,4827,4828;		// Spell 4~6 / Spell 7
+			.@string$ = "Estatásticas de feitiÃ§os mÃ¡gicos serão dadas aleatoriamente por 4 ~ 6(MATK + Reduza o tempo de conjuraÃ§Ã£o variavel).";
+			break;
+		case 4:
+			setarray .@enchants[0],4832,4833,4834,4835;		// Expert Archer 1~3 / Expert Archer 4
+			.@string$ = "As Estatásticas de tiro com arco serão dadas aleatoriamente por 1 a 3 (taxa de ataque de alcance).";
+			break;
+		case 5:
+			setarray .@enchants[0],4863,4864,4865,4866;		// Fatal 1~3 / Fatal 4
+			.@string$ = "Estatásticas críticas serão dadas aleatoriamente por 1 ~ 4 (dano crítico + CRI).";
+			break;
+		case 6:
+			setarray .@enchants[0],4861,4862,4867,4868;		// MaxHP +1~3% / MaxHP +4%
+			.@string$ = "As Estatásticas MHP serão dadas aleatoriamente em 1 a 3 (Aumentar% MHP).";
+			break;
+		case 7:
+			setarray .@enchants[0],4870,4800,4871,4801;		// +25,50 or 75 sp / +100 sp
+			.@string$ = "As Estatásticas de SP serão dadas aleatoriamente por 25 a 75.";
+			break;
+		case 8:
+			setarray .@enchants[0],4869,4872,4873,4807;		// Delayafterattack 1~3 / +1 ASPD
+			.@string$ = "As Estatásticas de atraso de ataque serão dadas aleatoriamente em 1 a 3 (Reduzirá atraso de ataque).";
+			break;
+		case 9:
+			setarray .@enchants[0],4702,4703,4704,4853;		// Str +3~5 / Special Str
+			.@string$ = "Estatásticas STR serão dadas aleatoriamente por 3 a 5.";
+			break;
+		case 10:
+			setarray .@enchants[0],4731,4732,4733,4854;		// Agi +2~4 / Special Agi
+			.@string$ = "Estatásticas de AGI serão dadas aleatoriamente por 2 a 4.";
+			break;
+		case 11:
+			setarray .@enchants[0],4742,4743,4744,4855;		// Vit +3~5 / Special Vit
+			.@string$ = "Estatásticas VIT serão dadas aleatoriamente por 3 ~ 5.";
+			break;
+		case 12:
+			setarray .@enchants[0],4712,4713,4714,4856;		// Int +3~5 / Special Int
+			.@string$ = "Estatásticas INT serão dadas aleatoriamente por 3 ~ 5.";
+			break;
+		case 13:
+			setarray .@enchants[0],4722,4723,4724,4857;		// Dex +3~5 / Special Dex
+			.@string$ = "As Estatásticas DEX serão dadas aleatoriamente por 3 a 5.";
+			break;
+		case 14:
+			setarray .@enchants[0],4752,4753,4754,4858;		// Luk +3~5 / Special Luk
+			.@string$ = "Estatásticas LUK serão dadas aleatoriamente por 3 ~ 5.";
+			break;
+		}
+		mes "[ValquÃ­ria Obscura]";
+		mes .@string$ + " ^ff0000As estatásticas fornecidas nÃ£o podem ser retornadas.^000000 Você quer prosseguir?";
+		next;
+		if (select( "1.Sair", "2.Sim, eu quero tentar isso." ) == 1) {
+			mes "[Valquíria Obscura]";
+			mes "Mais tarde então...";
+			close;
+		}
+
+		// anti-hack
+		if (callfunc("F_IsEquipIDHack", EQI_GARMENT, 11076) || callfunc("F_IsEquipCardHack", EQI_GARMENT, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", EQI_GARMENT, .@refine))
+			close;
+
+		if (.@card[3] == 0) {
+			.@card[3] = .@enchants[ rand(3) ];
+			.@slot = 4;
+		}
+		else if (.@card[2] == 0 && .@refine >= 7) {
+			.@card[2] = .@enchants[ rand(3) ];
+			.@slot = 3;
+		}
+		else if (.@card[1] == 0 && .@refine >= 9) {
+			.@card[1] = .@enchants[ rand(4) ];
+			.@slot = 2;
+		}
+		else {
+			mes "[Valquíria Obscura]";
+			mes "Parece que este item já tem o máximo de encanto. Por favor, traga outro para estatísticas extras..";
+			close;
+		}
+		specialeffect2 EF_REPAIRWEAPON;
+		mes "[Valquíria Obscura]";
+		mes "Dando capacidade aos itens^990000" + .@slot + " socket^000000.";
+		delequip EQI_GARMENT;
+		getitem2 11076,1,1, .@refine,0, .@card[0], .@card[1], .@card[2], .@card[3];
+		close;
+	case 3:
+		mes "[Valquíria Obscura]";
+		mes "A reposição de estatísticas da Asa do Anjo Caído custará 1,000,000 zeny?";
+		mes "Você deseja continuar?";
+		next;
+		if (select( "Sim", "Não Obrigado!" ) == 2)
+			close;
+		if (Zeny < 1000000) {
+			mes "[Valquíria Obscura]";
+			mes "You liar you don't have enough zeny!";
+			close;
+		}
+		if (getequipid(EQI_GARMENT) == 11076) {
+			.@refine = getequiprefinerycnt(EQI_GARMENT);
+			.@card[0] = getequipcardid(EQI_GARMENT,0);
+
+			mes "[Valquíria Obscura]";
+			specialeffect2 EF_REPAIRWEAPON;
+			mes "Redefinindo estatísticas do item.";
+			delequip EQI_GARMENT;
+			Zeny -= 1000000;
+			getitem2 11076,1,1, .@refine,0, .@card[0],0,0,0;// Godlike Manteal
+		}
+		close;
+	}
+}

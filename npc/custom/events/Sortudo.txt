@@ -1,0 +1,249 @@
+novice,46,50,4	script	Evento Sortudo	795,{
+
+set @Npc$,"^ff0000[Evento Sortudo]^000000";
+
+function WarpSortudo;
+function TutorialSortudo;
+
+mes @Npc$;
+mes "Olá seja bem vindo ao Evento Sortudo";
+mes "Por favor antes de entrar use o comando autoloot";
+mes "Para que nenhum item caia no chão";
+mes "O que você deseja fazer ?";
+next;
+switch(select("^008000»^000000 Ir até o evento","^008000»^000000 Tutorial do NPC","^008000»^000000 Ver Items possíveis de se ganhar","^008000»^000000 ^FF0000Sair^000000")){
+case 1:
+WarpSortudo();
+close;
+break;
+case 2:
+TutorialSortudo();
+close;
+break;
+case 3:
+mes @Npc$;
+mes ""+getitemname(6188)+"";
+mes ""+getitemname(7623)+"";
+mes ""+getitemname(12210)+"";
+close;
+break;
+case 4: close;
+}
+end;
+/* == Horários ==
+Configure Aqui os Horários, baseando-se nos exemplos:
+OnHour01:
+Iniciará o Evento às 01:00
+OnHour20:
+Iniciará o Evento às 20:00 (8 da noite)
+OnClock0815:
+Iniciará o Evento às 08:15
+OnClock1945:
+Iniciará o Evento às 19:45 (7:45 da noite)
+OnMinute05:
+Iniciará o Evento aos 5 minutos de Toda Hora
+OnMinute36:
+Iniciará o Evento aos 36 minutos de Toda Hora
+=============== */
+OnClock0030:
+OnClock0230:
+OnClock0430:
+OnClock0630:
+OnClock0830:
+OnClock1030:
+OnClock1230:
+OnClock1430:
+OnClock1630:
+OnClock1830:
+OnClock2030:
+OnClock2230:
+// == Fim das Configurações de Horário ==
+// ======================================
+set $EventoSorte,Rand(2,4);
+Set $SorteFechou,0;
+Announce "[Evento Sortudo]: O Evento da sorte está prestes a começar! Seja rápido e corra! Você tem 5 minutos!",0;
+InitNpcTimer;
+end;
+
+OnTimer60000:
+Announce "[Evento Sortudo]: O Evento da sorte está prestes a começar! Seja rápido e corra! Você tem 4 minutos!",0;
+end;
+
+OnTimer120000:
+Announce "[Evento Sortudo]: O Evento da sorte está prestes a começar! Seja rápido e corra! Você tem 3 minutos!",0;
+end;
+
+OnTimer180000:
+Announce "[Evento Sortudo]: O Evento da sorte está prestes a começar! Seja rápido e corra! Você tem 2 minutos!",0;
+end;
+
+OnTimer240000:
+Announce "[Evento Sortudo]: O Evento da sorte está prestes a começar! Seja rápido e corra! Você tem 1 minuto!",0;
+end;
+
+OnTimer300000:
+Set $SorteFechou,1;
+Announce "[Evento Sortudo]: Os warps para o evento fecharam, sinto muito tente da próxima vez!",0;
+PvpOn "quiz_02";
+SetMapFlag "quiz_02",mf_pvp_noparty;
+SetMapFlag "quiz_02",mf_pvp_noguild;
+MapAnnounce "quiz_02","[Evento Sortudo]: O Evento da Sorte Começou! Os Baús aparecerão em 2 minutos!",8;
+end;
+
+OnTimer420000:
+if($EventoSorte==2){
+monster "quiz_02",37,73, "Tesouro Passaporte",1325,1,"Evento Sortudo::OnPassouNivel21";
+monster "quiz_02",49,73, "Tesouro Passaporte",1325,1,"Evento Sortudo::OnPassouNivel22";
+monster "quiz_02",61,73, "Tesouro Passaporte",1325,1,"Evento Sortudo::OnPassouNivel23";
+monster "quiz_02",73,73, "Tesouro Passaporte",1325,1,"Evento Sortudo::OnPassouNivel24";
+}else if($EventoSorte==3){
+monster "quiz_02",319,57, "Tesouro Passaporte",1325,1,"Evento Sortudo::OnPassouNivel31";
+monster "quiz_02",331,57, "Tesouro Passaporte",1325,1,"Evento Sortudo::OnPassouNivel32";
+monster "quiz_02",343,57, "Tesouro Passaporte",1325,1,"Evento Sortudo::OnPassouNivel33";
+monster "quiz_02",355,57, "Tesouro Passaporte",1325,1,"Evento Sortudo::OnPassouNivel34";
+}else if($EventoSorte==4){
+monster "quiz_02",297,267, "Tesouro Final",1325,1,"Evento Sortudo::OnGanhou";
+monster "quiz_02",311,267, "Tesouro Final",1325,1,"Evento Sortudo::OnGanhou";
+}
+end;
+// == Evento Tipo 2 ==
+OnPassouNivel21:
+warp "quiz_02",37,80;
+MapAnnounce "quiz_02","[Evento Sortudo]: ["+strcharinfo(0)+"] passou para o Nível 2!!!",8;
+areawarp "quiz_02",33,52,41,73,"prontera",155,185;
+end;
+OnPassouNivel22:
+warp "quiz_02",49,80;
+MapAnnounce "quiz_02","[Evento Sortudo]: ["+strcharinfo(0)+"] passou para o Nível 2!!!",8;
+areawarp "quiz_02",45,52,53,73,"prontera",155,185;
+end;
+OnPassouNivel23:
+warp "quiz_02",61,80;
+MapAnnounce "quiz_02","[Evento Sortudo]: ["+strcharinfo(0)+"] passou para o Nível 2!!!",8;
+areawarp "quiz_02",57,52,65,73,"prontera",155,185;
+end;
+OnPassouNivel24:
+warp "quiz_02",73,80;
+MapAnnounce "quiz_02","[Evento Sortudo]: ["+strcharinfo(0)+"] passou para o Nível 2!!!",8;
+areawarp "quiz_02",69,52,73,73,"prontera",155,185;
+end;
+// == Evento Tipo 3 ==
+OnPassouNivel31:
+warp "quiz_02",319,60;
+MapAnnounce "quiz_02","[Evento Sortudo]: ["+strcharinfo(0)+"] passou para o Nível 2!!!",8;
+areawarp "quiz_02",314,34,323,57,"prontera",155,185;
+end;
+OnPassouNivel32:
+warp "quiz_02",331,60;
+MapAnnounce "quiz_02","[Evento Sortudo]: ["+strcharinfo(0)+"] passou para o Nível 2!!!",8;
+areawarp "quiz_02",326,34,335,57,"prontera",155,185;
+end;
+OnPassouNivel33:
+warp "quiz_02",343,60;
+MapAnnounce "quiz_02","[Evento Sortudo]: ["+strcharinfo(0)+"] passou para o Nível 2!!!",8;
+areawarp "quiz_02",338,34,347,57,"prontera",155,185;
+end;
+OnPassouNivel34:
+warp "quiz_02",355,60;
+MapAnnounce "quiz_02","[Evento Sortudo]: ["+strcharinfo(0)+"] passou para o Nível 2!!!",8;
+areawarp "quiz_02",350,34,359,57,"prontera",155,185;
+end;
+// == Continua Evento (Nivel 2 agora!) ==
+OnTimer430000:
+if($EventoSorte!=4) MapAnnounce "quiz_02","[Evento Sortudo]: Parabéns a vocês que passaram ao nível 2, mas o evento ainda não acabou!",8;
+end;
+OnTimer435000:
+if($EventoSorte!=4) MapAnnounce "quiz_02","[Evento Sortudo]: O Tesouro Final aparecerá em 1 minuto e meio!!!",8;
+end;
+// == O Tesouro Final! ==
+OnTimer525000:
+if($EventoSorte!=4) MapAnnounce "quiz_02","[Evento Sortudo]: O Tesouro Final apareceu!!!",8;
+if($EventoSorte==2) monster "quiz_02",54,95,"Tesouro Final",1325,1,"Evento Sortudo::OnGanhou";
+if($EventoSorte==3) monster "quiz_02",338,83,"Tesouro Final",1325,1,"Evento Sortudo::OnGanhou";
+end;
+// == Limpa Mapa após Evento ==
+OnTimer600000:
+killmonsterall "quiz_02";
+PvpOff "quiz_02";
+RemoveMapFlag "quiz_02",mf_pvp_noparty;
+RemoveMapFlag "quiz_02",mf_pvp_noguild;
+StopNpcTimer;
+end;
+
+OnGanhou:
+set .@itemrandom,rand(.@1,3);
+dispbottom .@itemrandom;
+if(.@itemrandom == 1) { getitem 6188,1;Announce "[Evento Sortudo]: O jogador ["+strcharinfo(0)+"] quebrou um dos baús, seu prêmio foi: "+getitemname(6188)+"",4;
+Sleep 2000;MapWarp "quiz_02","prontera",155,185;
+end;
+}
+
+if(.@itemrandom == 2) { getitem 7623,1;Announce "[Evento Sortudo]: O jogador ["+strcharinfo(0)+"] quebrou um dos baús, seu prêmio foi: "+getitemname(7623)+"",4;
+Sleep 2000; MapWarp "quiz_02","prontera",155,185; end;}
+
+if(.@itemrandom == 3) { getitem 12210,1; Announce "[Evento Sortudo]: O jogador ["+strcharinfo(0)+"] quebrou um dos baús, seu prêmio foi: "+getitemname(12210)+"",4;
+Sleep 2000;MapWarp "quiz_02","prontera",155,185;end;}
+end;
+
+OnInit:
+Set $SorteFechou,1;
+if(!$DropsSorteID[0]){
+SetArray $DropsSorteID[0],20000;
+SetArray $DropsSorteQnt[0],5;
+}
+end;
+// == Funções ==
+function WarpSortudo {
+mes @Npc$;
+if($SorteFechou==1){
+Mes "Desculpe-me, mas estamos fechados no momento!";
+Mes "Abriremos nesses horários";
+mes "00:30 , 02:30 , 04:30 , 06:30";
+mes "08:30 , 10:30 , 12:30 , 14:30";
+mes "16:30 , 18:30 , 20:30 , 22:30";
+close2;
+
+end;
+}
+
+Mes "Vamos lá!";
+close2;
+Set @place,Rand(3);
+if($EventoSorte==2){
+if(@place==0) warp "quiz_02",37,52;
+if(@place==1) warp "quiz_02",49,52;
+if(@place==2) warp "quiz_02",61,52;
+if(@place==3) warp "quiz_02",73,52;
+}else if($EventoSorte==3){
+if(@place==0) warp "quiz_02",318,34;
+if(@place==1) warp "quiz_02",330,34;
+if(@place==2) warp "quiz_02",342,34;
+if(@place==3) warp "quiz_02",354,34;
+}else if($EventoSorte==4) warp "quiz_02",304,234;
+end;
+}
+function TutorialSortudo {
+mes @Npc$;
+Mes "O evento se chama ^FF0000Evento da Sorte^000000 pois";
+Mes "você precisa de muita sorte nele";
+next;
+mes @Npc$;
+Mes "Você entra em uma sala, onde será pvp!";
+Mes "Após 2 Minutos, aparecerá um baú que permitirá que você passe para o nível 2, para lutar pelo Prêmio Final";
+next;
+mes @Npc$;
+Mes "Mas há um modo onde não há nível 2, mas há 2 Baús de Prêmio!!";
+close2;
+end;
+}
+}
+// == MapFlags ==
+quiz_02	mapflag	nomemo
+quiz_02	mapflag	nowarp
+quiz_02	mapflag	nowarpto
+quiz_02	mapflag	noicewall
+quiz_02	mapflag	nosave
+quiz_02	mapflag	noteleport
+quiz_02	mapflag	nopenalty
+quiz_02	mapflag	nobranch
+quiz_02	mapflag	nosave	SavePoint

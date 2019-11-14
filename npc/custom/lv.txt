@@ -1,0 +1,10 @@
+//====== Comentários ===========================================
+//= 1.0 - NPC Criado				       [Banned]
+//==============================================================
+-	script	OnPCBaseLvUpEvent	-1,{
+	OnPCBaseLvUpEvent:
+//	if(BaseLevel != 999) end;
+	if(BaseLevel != 999){
+	announce "Parabéns ao Jogador "+StrCharInfo(0)+" , acaba de chegar ao nível 999!",8;
+	}
+}

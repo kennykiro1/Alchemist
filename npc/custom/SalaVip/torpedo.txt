@@ -1,0 +1,127 @@
+sec_in02,130,172,4	script	Torpedo [VIP]	888,{
+ 
+//-- Delay para enviar torpedo?
+set .@DelayAnn,3;
+//--
+//-- Usar zenys para enviar mensagens? [1: Sim/2: Nâo]
+set .@Zeny,2;
+//--
+//-- Valor cobrado por torpedo?
+set .@ZenyValor,1000000;        
+//--
+//-- Configuração dos palavrões
+set .@anuncio_palavrao$[0],"puta";
+set .@anuncio_palavrao$[1],"gay";
+set .@anuncio_palavrao$[2],"viadinho";
+set .@anuncio_palavrao$[3],"prostituta";
+set .@anuncio_palavrao$[4],"cuzão";
+set .@anuncio_palavrao$[5],"fdp";
+set .@anuncio_palavrao$[6],"caralho";
+set .@anuncio_palavrao$[7],"caraleo";
+set .@anuncio_palavrao$[8],"lixo";
+set .@anuncio_palavrao$[9],"mãe";
+set .@anuncio_palavrao$[10],"mae";
+set .@anuncio_palavrao$[11],"pai";
+set .@anuncio_palavrao$[12],"tnc";
+set .@anuncio_palavrao$[13],"lixos";
+set .@anuncio_palavrao$[14],"noob";
+ 
+//-- Configuração dos sites
+set .@anuncio_sites$[0],".ws";
+set .@anuncio_sites$[1],"www.";
+set .@anuncio_sites$[2],"http";
+set .@anuncio_sites$[3],".com";
+set .@anuncio_sites$[4],".net";
+set .@anuncio_sites$[5],".org";
+set .@anuncio_sites$[6],".com.br";
+ 
+function	DelayAnnounce;
+if(!DelayAnnounce("DelayGet",getcharid(3),.@DelayAnn))
+{
+dispbottom "Me desculpe, mas você deve esperar: "+.@DelayAnn+" minutos para poder enviar outro torpedo !";
+close;
+}
+if (getgroupid()<1){
+mes "Desculpe, você não é um jogador VIP.";
+close;
+}
+mes "[Torpedo [VIP]";
+mes "Olá "+strcharinfo(0)+" ! deseja enviar uma mensagem?";
+mes "Total Enviados: ^0000FF"+#envio+"^000000";
+mes "Delay: ^0000FF"+.@DelayAnn+" minutos.^000000";
+if(select("- Sim:- Não") == 2) close;
+
+next;
+Restart:
+mes "[Torpedo [VIP]";
+mes "Muito bem, digite a sua mensagem:";
+input @msg$;
+next;
+ 
+for(set .@num,0; .@num < getarraysize(.@anuncio_palavrao$); set .@num, .@num + 1)
+{
+if(compare(@msg$,.@anuncio_palavrao$[.@num]))
+{
+mes "[Torpedo [VIP]";
+mes "Me desculpe, mais não é permitido palavrões no anuncio !";
+close;
+}
+}
+ 
+for(set .@num,0; .@num < getarraysize(.@anuncio_sites$); set .@num, .@num + 1)
+{
+if(compare(@msg$,.@anuncio_sites$[.@num]))
+{
+mes "[Torpedo [VIP]";
+mes "Me desculpe, mais não é permitido divulgação de sites aqui !";
+close;
+}
+}
+ 
+if (.@Zeny == 1)
+{
+if(Zeny<.@ZenyValor)
+{
+mes "[Torpedo [VIP]";
+mes "Me desculpe mas você não tem zenys suficientes para usar";
+mes "os serviços de torpedos !";
+next;
+mes "[Torpedo [VIP]";
+mes "Você irá precisar de: ^FF0000"+.@ZenyValor+"z^000000.";
+close;
+}
+}
+ 
+mes "[Torpedo [VIP]";
+mes "Você digitou:";
+mes "'^FF0000"+@msg$+"^000000'";
+switch(select("- Sim","- Não"))
+        {
+case 1:
+announce "[Torpedo VIP] ~ "+strcharinfo(0)+": "+@msg$+".",2;
+DelayAnnounce("DelaySet",getcharid(3));
+set Zeny,Zeny-.@ZenyValor;
+set #envio,#envio+1;
+end;
+close;
+ 
+case 2:
+close2;
+goto Restart;
+}
+ 
+function	DelayAnnounce	{
+ 
+if( getarg(0) == "DelaySet" )
+{
+setd "$anndelay_"+getarg(1),gettime(4)*24*60 + gettime(6)*60 + gettime(2);
+return 0;
+}
+else
+if( getarg(0) == "DelayGet" )
+{
+set .@check, gettime(4)*24*60 + gettime(6)*60 + gettime(2) - getd("$anndelay_"+getarg(1));
+return !(.@check >= 0 && .@check < getarg(2) );
+}
+}
+}

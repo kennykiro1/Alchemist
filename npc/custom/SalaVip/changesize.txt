@@ -1,0 +1,37 @@
+//------------------------- Menino Size ----------------------//
+//Criado Por: KyoSasuke
+//------------------------------------------------------------//
+//Versão 1.0
+//------------------------------------------------------------//
+// Script que pergunta qual tamanho o jogador deseja ficar....
+//------------------------------------------------------------//
+// Não mais pequeno, e agora é mais util.. haha
+//------------------------------------------------------------//
+sec_in02,133,167,5	script	Menino da Size	100,{
+mes "[^aa0000Menino^000000]";
+mes "Olá "+strcharinfo(0)+", o que deseja?";
+if(select("- Mudar meu tamanho:- Nada")==2)
+{
+mes "[^aa0000Menino da Size^000000]";
+mes "Tudo bem, volte quando quiser.";
+close;
+}
+else
+{
+next;
+mes "[^aa0000Menino da Size^000000]";
+mes "Que tamanho deseja ficar?";
+switch(select("- Grande:- Normal:- Pequeno"))
+{
+case 1: next;
+atcommand "@size 2";
+end;
+case 2: next;
+atcommand "@size 0";
+end;
+case 3: next;
+atcommand "@size 1";
+end;
+}
+}
+}

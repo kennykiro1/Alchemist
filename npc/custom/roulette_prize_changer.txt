@@ -1,0 +1,128 @@
+//===== rAthena Script =======================================
+//= Lucky Roulette Prize Changer
+//===== Description: =========================================
+//= Change Lucky Roulette Prizes.
+//===== Additional Comments: =================================
+//= 1.0 Initial script. [GodKnows Jhomz]
+//===== Rules: ===============================================
+//= 1. Do not use for exchanging purpose.						
+//= 2. Do not claim it as yours.								
+//= 3. Do not change or remove the credits.					
+//= 4. Do not re-sell the script in order to get paid.			
+//= 5. Do not re-share upon modification without permission.
+//============================================================
+prontera,90,211,4	script	Trocador de prêmios RS	97,{
+	.n$ = "[Prize Manager]";
+	if(getgroupid() < 99){
+		mes .n$;
+		mes "Se você quiser jogar a Roleta da Sorte, clique no ícone ao lado do seu mini-mapa.";
+		close;
+	} else {
+		mes .n$;
+		mes "Oi, GM "+strcharinfo(0)+", Como posso ajudá-lo?";
+		next;
+		switch(prompt("Alterar prêmios da roleta da sorte:Oh, eu só estou passando.")){
+			case 1:
+				.@nb = query_sql("SELECT `index`,`item_id`,`amount` FROM `db_roulette` ORDER BY `index` ASC",.@idx,.@item,.@amount);
+				mes .n$;
+				mes "^FF0000Lembrete:^000000 Os prêmios da Roleta da Sorte serão atualizados apenas quando o servidor reiniciar, mas esta lista é atualizada instantaneamente.";
+				mes "Ok, aqui está a lista de prêmios atuais.";
+				mes "# \t Montante \t Nome do item";
+				for(set .@i,0; .@i < .@nb; .@i++){
+					mes ""+(.@idx[.@i]+1)+". "+.@amount[.@i]+"x "+getitemname(.@item[.@i]);
+				}
+				next;
+				cutin "rouletteGuide",2;
+				for(@i = 0; @i < .@nb; @i++)
+					.@menu$ = .@menu$ +":"+(.@idx[@i]+1)+". [ "+.@amount[@i]+"x ][ ^008800"+getitemname(.@item[@i])+"^000000 ]";
+					.@s = select(.@menu$) - 2;
+				next;
+				mes .n$;
+				mes "Por favor, selecione você deseja alterar:";
+				next;
+				switch(select("Item ["+getitemname(.@item[.@s])+"]:Amount ["+.@amount[.@s]+"x]")){
+					case 1:
+						OnUpdateItemID:
+						mes .n$;
+						mes "Insira um novo ID do item:";
+						mes "Colocar [0] cancelar.";
+						next;
+						input .@newitem;
+						if(.@newitem == 0) close;
+						if(getitemname(.@newitem) == "null"){
+							mes .n$;
+							mes "ID de item inválido. Por favor, tente novamente.";
+							next;
+							callsub OnUpdateItemID;
+						} else {
+							mes .n$;
+							mes "Tem certeza de que deseja continuar esta atualização?";
+							mes "De : "+.@amount[.@s]+"x "+getitemname(.@item[.@s]);
+							mes "To : "+.@amount[.@s]+"x "+getitemname(.@newitem);
+							next;
+							switch(select("No:Yes")){
+								case 1:
+									mes .n$;
+									mes "A atualização foi cancelada.";
+									cutin "",255;
+									close;
+									break;
+								case 2:
+									query_sql("UPDATE `db_roulette` SET `item_id` = '"+.@newitem+"' WHERE `index` = '"+.@idx[.@s]+"'");
+									mes .n$;
+									mes "A atualização foi bem-sucedida.";
+									mes "^FF0000Reminder:^000000 Os prêmios da sorte na roleta serão atualizados apenas quando o servidor reiniciar.";
+									mes "Tenha um bom dia.";
+									cutin "",255;
+									close;
+							}
+						}
+					case 2:
+						OnUpdateAmount:
+						mes .n$;
+						mes "Digite um novo valor:";
+						mes "Colocar [0] cancelar.";
+						next;
+						input .@newamount;
+						if(.@newamount == 0) close;
+						if(.@newamount > 30000){
+							mes .n$;
+							mes "Montante inválido. Os prêmios não podem ultrapassar 30.000. Por favor, tente novamente.";
+							next;
+							callsub OnUpdateAmount;
+						} else {
+							mes .n$;
+							mes "Tem certeza de que deseja continuar esta atualização?";
+							mes "De : "+.@amount[.@s]+"x "+getitemname(.@item[.@s]);
+							mes "Para : "+.@newamount+"x "+getitemname(.@item[.@s]);
+							next;
+							switch(select("No:Yes")){
+								case 1:
+									mes .n$;
+									mes "A atualização foi cancelada.";
+									cutin "",255;
+									close;
+									break;
+								case 2:
+									query_sql("UPDATE `db_roulette` SET `amount` = '"+.@newamount+"' WHERE `index` = '"+.@idx[.@s]+"'");
+									mes .n$;
+									mes "A atualização foi bem-sucedida.";
+									mes "^FF0000Lembrete:^000000 Os Prêmios da Roleta da Sorte serão atualizados somente quando o servidor reiniciar.";
+									mes "Tenha um bom dia.";
+									cutin "",255;
+									close;
+							}
+						}
+				}
+				close;
+				break;
+			case 2:
+				mes .n$;
+				mes "Ah eu vejo. Tenha um bom dia.";
+				close;
+			case 255:
+				cutin "",255;
+				end;
+		}
+	}
+}

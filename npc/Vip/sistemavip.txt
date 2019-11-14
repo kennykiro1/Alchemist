@@ -1,0 +1,17 @@
+-	Script	Vip_status	-1,{
+
+OnPcloginEvent:
+
+if(Vip_status(1)) {
+
+Set .@timer, Vip_status(2);
+dispbottom "Você é VIP";
+dispbottom "=======================================";
+dispbottom "Status da Conta: VIP";
+dispbottom "Bonus Status: Exp e Job acrescentado 10%";
+dispbottom "Bonus Status: drop acrescentado 10%";
+dispbottom "Tempo Restante:"+callfunc("Time2Str",.@timer);
+dispbottom "=======================================";
+	end;
+	}
+}

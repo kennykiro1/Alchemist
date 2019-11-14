@@ -1,0 +1,12 @@
+sec_in02,161,162,4	script	Saida	103,{
+	mes "Olá "+StrCharInfo(0)+"!";
+	mes "Deseja ir para algum dos lugares abaixo?";
+	next;
+	switch(select("sair")){
+		case 1:
+			mes "Até mais!";
+			close2;
+			warp "prontera",155,180;
+			end;
+	}
+}

@@ -1,0 +1,42 @@
+// Cash Shop Database
+// Contains the items sold in the ingame cash shop.
+//
+// Structure of Database:
+// Type,ItemID,Price
+//
+// Type:
+//    0: Novo
+//    1: Popular
+//    2: Limitado
+//    3: Aluquel de equipamentos
+//    4: Equipamento permanente
+//    5: Buff
+//    6: recuperação
+//    7: etc
+//    8: Ofertas especiais
+//
+// Price:
+//    Item cost, in cash points (#CASHPOINTS).
+0,11062,20000
+0,11063,20000
+0,11064,20000
+1,11072,15000
+1,11073,15000
+1,11074,15000
+1,11075,15000
+0,11088,20000
+0,11089,20000
+0,11090,20000
+0,11118,20000
+0,11076,20000
+0,11115,20000
+0,11105,20000
+3,12622,9000
+7,9200,10000
+7,9201,10000
+7,9202,10000
+7,9203,10000
+7,9204,10000
+0,11134,20000
+0,11132,20000
+0,11130,20000
